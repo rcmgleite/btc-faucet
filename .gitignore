@@ -1,0 +1,11 @@
+bitcoin-data/data/*
+node_modules
+secret
+error.log
+combined.log
+server/error.log
+server/combined.log
+server/node_modules/*
+cli/node_modules/*
+error.log
+combined.log

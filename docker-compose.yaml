@@ -1,0 +1,9 @@
+version: "3"
+services:
+  bitcoind:
+    image: sena/bitcore
+    ports:
+      - "18333:18333"
+      - "3001:3001"
+    volumes:
+      - ./bitcoin-data:/root/.bitcore

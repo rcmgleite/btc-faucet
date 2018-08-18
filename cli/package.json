@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "commander": "^2.17.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "devDependencies": {}
+}

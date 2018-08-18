@@ -1,0 +1,10 @@
+{
+  "name": "",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "moment": "^2.22.2",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {}
+}

@@ -6,21 +6,24 @@
   "scripts": {
     "install:offline": "docker pull lambci/lambda",
     "setup": "./node_modules/.bin/sls config credentials --provider aws --key KEY --secret SECRET",
-    "start": "./node_modules/.bin/sls offline start -r us-east-1 --noTimeout"
+    "start": "./node_modules/.bin/sls offline start -r us-east-1 --noTimeout",
+    "unit-test": "./node_modules/mocha/bin/mocha tests/unit/**/*.js",
+    "integration-test": "./node_modules/mocha/bin/mocha --timeout 20000 tests/integration/**/*.js"
   },
   "dependencies": {
     "bitgo": "^4.34.0",
     "bluebird": "^3.4.6",
     "dotenv": "^2.0.0",
     "jsonschema": "^1.1.1",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "sinon": "^6.1.5"
   },
   "devDependencies": {
     "aws-sdk": "^2.20.0",
     "chai": "^3.5.0",
     "json-loader": "^0.5.4",
     "jsonschema": "^1.1.1",
-    "mocha": "^3.2.0",
+    "mocha": "^3.5.3",
     "serverless-offline": "^3.10.2",
     "serverless-plugin-simulate": "0.0.10"
   }

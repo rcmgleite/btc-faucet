@@ -11,7 +11,8 @@ module.exports.Healthcheck = async (event, context) => {
 
 module.exports.SendBTC = async (event, context) => {
   try {
-    // TODO validate params
+    // If more parameters (eg amount) were made available to clients, 
+    // it would be mandatory to add some input validation here
     const params = _.isString(event.body) ? JSON.parse(event.body): event.body
     const faucetInstance = new Faucet()
     const amount = '10000' // FIXME - hardcoded amount. Could be a request param or calculated using throttling for example

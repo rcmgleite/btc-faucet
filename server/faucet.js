@@ -1,4 +1,5 @@
 const faucet = require('./lib/faucet')
+const BitGoJS = require('bitgo')
 
 class BTCFaucet {
   constructor() { }
@@ -12,7 +13,9 @@ class BTCFaucet {
       amount,
     }
 
-    return await faucet.SendBTC(params)
+    // Inject the bitgo sdk to make lib/faucet testing easier
+    const bitgo = new BitGoJS.BitGo({ env: 'test' }) 
+    return await faucet.SendBTC(bitgo, params)
   }
 }
 

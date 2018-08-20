@@ -9,3 +9,4 @@ server/node_modules/*
 cli/node_modules/*
 error.log
 combined.log
+server/tests/integration/config.json

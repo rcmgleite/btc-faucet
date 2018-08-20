@@ -24,6 +24,8 @@ module.exports.SendBTC = async (event, context) => {
       statusCode: 200
     }
   } catch(err) {
+    // On error, log the problem but just send 500 to clients
+    // to avoid exposing sensitive data
     logger.error(err)
     return {
       statusCode: 500,

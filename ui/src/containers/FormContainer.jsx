@@ -8,7 +8,10 @@ class FormContainer extends Component {
     super(props)
 
     this.state = {
-      addressTo: ''
+      addressTo: '',
+      type: 'info',
+      message: '',
+      submitBtnDisabled: false,
     }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
     this.handleInput = this.handleInput.bind(this)
@@ -21,6 +24,7 @@ class FormContainer extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
+    this.setState({ type: 'info', message: 'processing...', submitBtnDisabled: true });
     let reqBody = {
       destinationAddress: this.state.addressTo
     }
@@ -35,29 +39,42 @@ class FormContainer extends Component {
         'Content-Type': 'application/json'
       },
     }).then(response => {
-      console.log(response) // TODO handle success
+      console.log(response)
+      if (response.status !== 200) {
+        throw response
+      }
+      this.setState({ type: 'success', message: 'Transaction succeeded', submitBtnDisabled: false }, this.sendFormData);
     }).catch(err => {
-      console.log(err) // TODO handle error
+      console.log(err)
+      this.setState({ type: 'danger', message: 'Something went wrong...', submitBtnDisabled: false }, this.sendFormData);
     })
   }   
 
   render() {
+    if (this.state.type && this.state.message) {
+      var classString = 'alert alert-' + this.state.type;
+      var status = <div id="status" className={classString} ref="status">
+        {this.state.message}
+      </div>;
+    }
     return (
-        <form className="container-fluid" onSubmit={this.handleFormSubmit}>
-            <Input inputType={'text'}
-                   title= {'testcoin address'} 
-                   name= {'addressTo'}
-                   value={this.state.addressTo} 
-                   placeholder = {'Enter your testcoin address'}
-                   handleChange = {this.handleInput}
-                   /> {/* Name of the user */}
-          <Button 
-              action = {this.handleFormSubmit}
-              type = {'primary'} 
-              title = {'Give me some coins!'} 
-            style={buttonStyle}
-          /> { /*Submit */ }
-        </form>
+      <form className="container-fluid" onSubmit={this.handleFormSubmit}>
+        <Input inputType={'text'}
+          title= {'testcoin address'} 
+          name= {'addressTo'}
+          value={this.state.addressTo} 
+          placeholder = {'Enter your testcoin address'}
+          handleChange = {this.handleInput}
+        /> {/* Name of the user */}
+        {status}
+        <Button 
+          action = {this.handleFormSubmit}
+          type = {'primary'} 
+          title = {'Give me some coins!'} 
+          disabled = {this.state.submitBtnDisabled}
+          style={buttonStyle}
+        /> { /*Submit */ }
+      </form>
     )
   }
 }

@@ -2,8 +2,7 @@ import React from 'react';
 
 
 const Input = (props) => {
-	//console.log(props.value);
-	return (  
+  return (  
   <div className="form-group">
     <label for={props.name} className="form-label">{props.title}</label>
     <input

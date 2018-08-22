@@ -40,7 +40,6 @@ program
     try {
       const response = await rp(httpOptions)
       logger.info('Successfully received btc')
-      logger.info(response)
     } catch(err) {
       logger.info("Failed to receive btc")
       logger.info(`${err.message}`)

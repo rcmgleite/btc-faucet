@@ -14,9 +14,11 @@
     "bitgo": "^4.34.0",
     "bluebird": "^3.4.6",
     "dotenv": "^2.0.0",
+    "joi": "^13.6.0",
     "jsonschema": "^1.1.1",
     "lodash": "^4.17.10",
-    "sinon": "^6.1.5"
+    "sinon": "^6.1.5",
+    "wallet-address-validator": "^0.1.7"
   },
   "devDependencies": {
     "aws-sdk": "^2.20.0",

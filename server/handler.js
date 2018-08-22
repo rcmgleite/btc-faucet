@@ -1,6 +1,7 @@
+const _ = require('lodash')
 const Faucet = require('./faucet')
 const logger = require('../utils/logger')
-const _ = require('lodash')
+const requestValidator = require('./handler_input_validation')
 
 module.exports.Healthcheck = async (event, context) => {
   return {
@@ -11,9 +12,14 @@ module.exports.Healthcheck = async (event, context) => {
 
 module.exports.SendBTC = async (event, context) => {
   try {
-    // If more parameters (eg amount) were made available to clients, 
-    // it would be mandatory to add some input validation here
     const params = _.isString(event.body) ? JSON.parse(event.body): event.body
+    if (!requestValidator.validateSendBTC(params)) {
+      return {
+        statusCode: 400,
+        body: `Invalid destination address` 
+      }
+    }
+
     const faucetInstance = new Faucet()
     const amount = '10000' // FIXME - hardcoded amount. Could be a request param or calculated using throttling for example
     const destinationAddress = params.destinationAddress

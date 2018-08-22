@@ -40,10 +40,13 @@ class FormContainer extends Component {
       },
     }).then(response => {
       console.log(response)
-      if (response.status !== 200) {
+      if (response.status === 200) {
+        this.setState({ type: 'success', message: 'Transaction succeeded', submitBtnDisabled: false }, this.sendFormData);
+      } else if(response.status === 400) {
+        this.setState({ type: 'danger', message: 'Invalid address', submitBtnDisabled: false }, this.sendFormData);
+      } else {
         throw response
       }
-      this.setState({ type: 'success', message: 'Transaction succeeded', submitBtnDisabled: false }, this.sendFormData);
     }).catch(err => {
       console.log(err)
       this.setState({ type: 'danger', message: 'Something went wrong...', submitBtnDisabled: false }, this.sendFormData);

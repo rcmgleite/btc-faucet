@@ -25,12 +25,17 @@ module.exports.SendBTC = async (event, context) => {
       statusCode: 200
     }
   } catch(err) {
-    // On error, log the problem but just send 500 to clients
-    // to avoid exposing sensitive data
-    logger.error(err)
+    logger.error(err.result ? err.result.error : '')
+    if (err.result && err.result.error === 'invalid address') {
     return {
-      statusCode: 500,
-      body: `Unable to transfer coins. Try again later` 
+        statusCode: 400,
+        body: `Invalid destination address` 
+      }
+    } else {
+    return {
+        statusCode: 500,
+        body: `Unable to transfer coins. Try again later` 
+      }
     }
   }
 }
